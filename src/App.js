@@ -3,14 +3,32 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { counter: 600 }
+    this.myInterval = null;
+    this.countDown = this.countDown.bind(this);
+  }
+
+  
+
+  countDown() {
+    console.log(this.state.counter);
+    this.setState({
+      counter: this.state.counter - 1
+    });
+  }
+
+  componentDidMount() {
+    this.myInterval = setInterval(this.countDown, 1000);
+  }
+  
+  
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1>Hello world</h1>
-         
-        </header>
+        <h1>{ this.state.counter }</h1>
       </div>
     );
   }
