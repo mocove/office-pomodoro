@@ -2,6 +2,13 @@
   text-align: center;
 }
 
+.running {
+  background-color: #ffe2e2
+}
+.stopped {
+  background-color: #d5f6ff;
+}
+
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;
