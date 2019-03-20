@@ -7,8 +7,14 @@ class App extends Component {
     super(props);
     this.state = { 
       counter: 600,
-      isRunning: false }
+      isRunning: false,
+      txtHeadline: 'Do Not Disturb',
+      txtLeadUp: 'I will be available in',
+      txtEnding: 'Thank you.'
+    }
+    
     this.myInterval = null;
+    
     this.tick = this.tick.bind(this);
     this.startCountDown = this.startCountDown.bind(this);
     this.stopCountDown = this.stopCountDown.bind(this);
@@ -55,7 +61,10 @@ class App extends Component {
     let className = 'App ' + bgClass
     return (
       <div className={className}>
-        <h1>{ this.state.counter }</h1>
+        <h1>Open Office Pomodoro Timer</h1>
+        <p>{ this.state.txtHeadline }</p>
+        <p>{ this.state.txtLeadUp } { this.state.counter } seconds.</p>
+        <p>{ this.state.txtEnding }</p>
         <button onClick={ this.startCountDown }>Start CountDown</button>
         <button onClick={ this.stopCountDown }>Stop CountDown</button>
         <br />
