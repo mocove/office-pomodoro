@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { Controls } from '../src/Controls';
+import { Settings } from '../src/Settings';
 
 class App extends Component {
   constructor(props) {
@@ -8,6 +10,7 @@ class App extends Component {
     this.state = { 
       counter: 600,
       isRunning: false,
+      isSettingsOpen: false,
       txtHeadline: 'Do Not Disturb',
       txtLeadUp: 'I will be available in',
       txtEnding: 'Thank you.'
@@ -19,9 +22,28 @@ class App extends Component {
     this.startCountDown = this.startCountDown.bind(this);
     this.stopCountDown = this.stopCountDown.bind(this);
     this.toggleIsRunning = this.toggleIsRunning.bind(this);
+    this.handleClickPlayStop = this.handleClickPlayStop.bind(this);
+    this.handleClickSettings = this.handleClickSettings.bind(this);
   }
 
-  
+  handleClickPlayStop() {
+    if(!this.state.isRunning) {
+      this.startCountDown()
+    } else {
+      this.stopCountDown();
+    }
+  }
+
+  handleClickSettings() {
+    if(!this.state.isSettingsOpen) {
+      this.setState({ isSettingsOpen: true });
+    } else {
+      this.setState({ isSettingsOpen: false });
+      
+
+      //close settings and set state
+    }
+  }
 
   tick() {
     this.setState({
@@ -59,6 +81,9 @@ class App extends Component {
       bgClass = 'running';
     }
     let className = 'App ' + bgClass
+
+
+
     return (
       <div className={className}>
         <br /><br /><h1>Open Office Pomodoro Timer</h1>
@@ -68,7 +93,9 @@ class App extends Component {
         <button onClick={ this.startCountDown }>Start CountDown</button>
         <button onClick={ this.stopCountDown }>Stop CountDown</button>
         <br />
-        <p>Running: { this.state.isRunning ? 'True' : 'False' }</p>
+        <p>Running: { this.state.isRunning ? 'Stop' : 'Play' }</p>
+        <Controls state={ this.state.isRunning } playStopClickHandler={ this.handleClickPlayStop } settingsClickHandler={ this.handleClickSettings } />
+        <Settings show={ this.state.isSettingsOpen } />
       </div>
     );
   }

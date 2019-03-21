@@ -3,6 +3,7 @@
 .App {
   text-align: center;
   height: 100%;
+  position: relative;
 }
 
 .running {
@@ -11,6 +12,20 @@
 .stopped {
   background-color: #d5f6ff;
 }
+
+#controls {
+  position: absolute;
+  bottom: 1em;
+  right: 1em;
+}
+
+#settings {
+  background-color: aliceblue;
+  padding: 1em;
+  width: 300px;
+  margin: 0 auto;
+}
+
 /*
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
