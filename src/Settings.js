@@ -16,15 +16,15 @@ export class Settings extends React.Component {
                     <form>
                         <p>
                         <label>Big text:&nbsp;
-                            <input type="text" defaultValue="VALUE"></input>
+                            <input onChange={this.props.handlers.txtHeadlineHandler} type="text" defaultValue={this.props.texts.bigText}></input>
                         </label></p>
                         <p>
                         <label>Smaller text:&nbsp;
-                            <input type="text" defaultValue="VALUE"></input>
+                            <input onChange={this.props.handlers.txtLeadupHandler} type="text" defaultValue={this.props.texts.smallText}></input>
                         </label></p>
                         <p>
                         <label>Thank you text:&nbsp;
-                            <input type="text" defaultValue="VALUE"></input>
+                            <input onChange={this.props.handlers.txtEndingHandler} type="text" defaultValue={this.props.texts.thankYouText}></input>
                         </label></p>
                         
                         <p>
@@ -36,6 +36,7 @@ export class Settings extends React.Component {
                             <label for="english">English</label>
                             <input name="language" type="radio" id ="danish" value="English" />
                             <label for="english">Dansk</label>
+                        
                     </form>
                 </div>
             )

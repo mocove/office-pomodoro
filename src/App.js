@@ -24,6 +24,10 @@ class App extends Component {
     this.toggleIsRunning = this.toggleIsRunning.bind(this);
     this.handleClickPlayStop = this.handleClickPlayStop.bind(this);
     this.handleClickSettings = this.handleClickSettings.bind(this);
+
+    this.handleTxtHeadlineChange = this.handleTxtHeadlineChange.bind(this);
+    this.handleTxtLeadupChange = this.handleTxtLeadupChange.bind(this);
+    this.handleTxtEndingChange = this.handleTxtEndingChange.bind(this);
   }
 
   handleClickPlayStop() {
@@ -39,10 +43,20 @@ class App extends Component {
       this.setState({ isSettingsOpen: true });
     } else {
       this.setState({ isSettingsOpen: false });
-      
-
-      //close settings and set state
     }
+  }
+
+  handleTxtHeadlineChange(e) {
+    console.log(e.target.value);
+    this.setState({ txtHeadline: e.target.value });
+  }
+  handleTxtLeadupChange(e) {
+    console.log(e.target.value);
+    this.setState({ txtLeadUp: e.target.value });
+  }
+  handleTxtEndingChange(e) {
+    console.log(e.target.value);
+    this.setState({ txtEnding: e.target.value });
   }
 
   tick() {
@@ -95,7 +109,11 @@ class App extends Component {
         <br />
         <p>Running: { this.state.isRunning ? 'Stop' : 'Play' }</p>
         <Controls state={ this.state.isRunning } playStopClickHandler={ this.handleClickPlayStop } settingsClickHandler={ this.handleClickSettings } />
-        <Settings show={ this.state.isSettingsOpen } />
+        <Settings
+          handlers={{
+            txtHeadlineHandler: this.handleTxtHeadlineChange,
+            txtLeadupHandler: this.handleTxtLeadupChange,
+            txtEndingHandler: this.handleTxtEndingChange }} texts={{ bigText: this.state.txtHeadline, smallText: this.state.txtLeadUp, thankYouText: this.state.txtEnding }} show={ this.state.isSettingsOpen } />
       </div>
     );
   }
