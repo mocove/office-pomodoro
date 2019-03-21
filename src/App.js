@@ -61,7 +61,7 @@ class App extends Component {
     let className = 'App ' + bgClass
     return (
       <div className={className}>
-        <h1>Open Office Pomodoro Timer</h1>
+        <br /><br /><h1>Open Office Pomodoro Timer</h1>
         <p>{ this.state.txtHeadline }</p>
         <p>{ this.state.txtLeadUp } { this.state.counter } seconds.</p>
         <p>{ this.state.txtEnding }</p>
