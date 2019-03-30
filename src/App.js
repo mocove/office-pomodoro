@@ -11,6 +11,7 @@ class App extends Component {
       counter: 600,
       isRunning: false,
       isSettingsOpen: false,
+      isEditing: false,
       txtHeadline: 'Do Not Disturb',
       txtLeadUp: 'I will be available in',
       txtEnding: 'Thank you.'
@@ -19,6 +20,7 @@ class App extends Component {
     this.myInterval = null;
     
     this.tick = this.tick.bind(this);
+    this.toggleEditing = this.toggleEditing.bind(this);
     this.startCountDown = this.startCountDown.bind(this);
     this.stopCountDown = this.stopCountDown.bind(this);
     this.toggleIsRunning = this.toggleIsRunning.bind(this);
@@ -28,6 +30,7 @@ class App extends Component {
     this.handleTxtHeadlineChange = this.handleTxtHeadlineChange.bind(this);
     this.handleTxtLeadupChange = this.handleTxtLeadupChange.bind(this);
     this.handleTxtEndingChange = this.handleTxtEndingChange.bind(this);
+    this.handleTxtChange = this.handleTxtChange.bind(this);
   }
 
   handleClickPlayStop() {
@@ -46,9 +49,23 @@ class App extends Component {
     }
   }
 
+  handleTxtChange(e) {
+    const text = e.target.dataset.text;
+    const cText = 'txt' + text.charAt(0).toUpperCase() + text.slice(1);
+    console.log(cText);
+    const newState  = {};
+    newState[cText] = e.target.value;
+    this.setState(newState);
+    if (e.keyCode === 13) {
+      e.target.blur();
+    }
+  }
+
   handleTxtHeadlineChange(e) {
-    console.log(e.target.value);
     this.setState({ txtHeadline: e.target.value });
+    if (e.keyCode === 13) {
+      e.target.blur();
+    }
   }
   handleTxtLeadupChange(e) {
     console.log(e.target.value);
@@ -57,6 +74,17 @@ class App extends Component {
   handleTxtEndingChange(e) {
     console.log(e.target.value);
     this.setState({ txtEnding: e.target.value });
+  }
+
+  toggleEditing(e) {
+    //const selected = e.target.dataset.text; 
+    if(this.state.isEditing) {
+      this.setState({ isEditing: false });
+    } else {
+      this.setState({ isEditing: true });
+    }
+    //const selectedInput = document.querySelector(`input[data-text="${selected}"]`);
+    //console.log(selectedInput);
   }
 
   tick() {
@@ -101,7 +129,13 @@ class App extends Component {
     return (
       <div className={className}>
         <br /><br /><h1>Open Office Pomodoro Timer</h1>
-        <p>{ this.state.txtHeadline }</p>
+        <div data-text="headline">
+          {this.state.isEditing ? (
+            <input data-text="headline" type="text" onBlur={this.toggleEditing} onKeyUp={this.handleTxtChange} placeholder={this.state.txtHeadline} />
+          ) : (
+            <p data-text="headline" onClick={this.toggleEditing}>{ this.state.txtHeadline }</p>
+          )}
+        </div>
         <p>{ this.state.txtLeadUp } { this.state.counter } seconds.</p>
         <p>{ this.state.txtEnding }</p>
         <button onClick={ this.startCountDown }>Start CountDown</button>
