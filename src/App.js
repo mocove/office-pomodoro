@@ -13,7 +13,7 @@ class App extends Component {
       isSettingsOpen: false,
       isEditing: false,
       txtHeadline: 'Do Not Disturb',
-      txtLeadUp: 'I will be available in',
+      txtLeadup: 'I will be available in',
       txtEnding: 'Thank you.'
     }
     
@@ -27,9 +27,9 @@ class App extends Component {
     this.handleClickPlayStop = this.handleClickPlayStop.bind(this);
     this.handleClickSettings = this.handleClickSettings.bind(this);
 
-    this.handleTxtHeadlineChange = this.handleTxtHeadlineChange.bind(this);
-    this.handleTxtLeadupChange = this.handleTxtLeadupChange.bind(this);
-    this.handleTxtEndingChange = this.handleTxtEndingChange.bind(this);
+    //this.handleTxtHeadlineChange = this.handleTxtHeadlineChange.bind(this);
+    //this.handleTxtLeadupChange = this.handleTxtLeadupChange.bind(this);
+    //this.handleTxtEndingChange = this.handleTxtEndingChange.bind(this);
     this.handleTxtChange = this.handleTxtChange.bind(this);
   }
 
@@ -60,7 +60,7 @@ class App extends Component {
       e.target.blur();
     }
   }
-
+/*
   handleTxtHeadlineChange(e) {
     this.setState({ txtHeadline: e.target.value });
     if (e.keyCode === 13) {
@@ -75,6 +75,7 @@ class App extends Component {
     console.log(e.target.value);
     this.setState({ txtEnding: e.target.value });
   }
+*/
 
   toggleEditing(e) {
     //const selected = e.target.dataset.text; 
@@ -131,12 +132,40 @@ class App extends Component {
         <br /><br /><h1>Open Office Pomodoro Timer</h1>
         <div data-text="headline">
           {this.state.isEditing ? (
-            <input data-text="headline" type="text" onBlur={this.toggleEditing} onKeyUp={this.handleTxtChange} placeholder={this.state.txtHeadline} />
+            <input
+              data-text="headline"
+              type="text"
+              onBlur={this.toggleEditing}
+              onKeyUp={this.handleTxtChange}
+              placeholder={this.state.txtHeadline}
+            />
           ) : (
-            <p data-text="headline" onClick={this.toggleEditing}>{ this.state.txtHeadline }</p>
+            <p
+              data-text="headline"
+              onClick={this.toggleEditing}
+            >{ this.state.txtHeadline }</p>
           )}
         </div>
-        <p>{ this.state.txtLeadUp } { this.state.counter } seconds.</p>
+        <div data-text="leadup">
+          {this.state.isEditing ? (
+            <div>
+              <input
+                data-text="leadup"
+                type="text"
+                onBlur={this.toggleEditing}
+                onKeyUp={this.handleTxtChange}
+                placeholder={this.state.txtLeadup}
+              />
+              <span>{ this.state.counter } seconds.</span>
+          </div>
+          ) : (
+            <p
+              data-text="leadup"
+              onClick={this.toggleEditing}
+            >{ this.state.txtLeadup } { this.state.counter } seconds.</p>
+          )}
+        </div>
+
         <p>{ this.state.txtEnding }</p>
         <button onClick={ this.startCountDown }>Start CountDown</button>
         <button onClick={ this.stopCountDown }>Stop CountDown</button>
